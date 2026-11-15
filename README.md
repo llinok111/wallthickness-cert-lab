@@ -50,6 +50,11 @@ unfiltered loop independently and `verify.mjs` compares the two.
 | `slab-thin` (2×2×0.5) | 12 | min 0.5, max 2.0 | min **0.500000000000000** exactly, max **2.000000000000000** |
 | `solid-sphere` (control: no cavity) | 1224 | must NOT report a thin wall | min **1.984865** > 1.5, no false thin wall |
 
+**Third method, committed** (`node bench/independent-recompute.mjs`, does not import `src/core.mjs`;
+ray/triangle by explicit plane solve, point-in-triangle by sub-area comparison, band taken from the
+corpus metadata): measured 1224, min **0.19848650182779326**, max **0.19923314772082235**, median
+**0.19885877350815057**, **0/1224 outside the band** — independently reproduces the numbers above.
+
 Other assertions (`node bench/verify.mjs`, 12/12):
 
 - **witness recomputation** — 400 witnesses re-derived by a full O(T) rescan with no prefilter:
