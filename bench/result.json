@@ -1,0 +1,38 @@
+{
+  "generated": "2026-11-15T10:27:19.506Z",
+  "mesh": {
+    "name": "shell-sphere",
+    "triangles": 2448,
+    "vertices": 1228
+  },
+  "workload": "one wall-thickness pass over every triangle (ray from centroid along -normal)",
+  "core": {
+    "n": 7,
+    "min": 186.739891,
+    "median": 204.924827,
+    "p95": 312.645326,
+    "max": 312.645326,
+    "mean": 229.05245185714287,
+    "stddev": 51.53451727505703,
+    "relStddev": 0.22499002676993152,
+    "coldStartMs": 296.623194,
+    "rayTriangleTests": 1470920,
+    "candidateScans": 5990256,
+    "aabbRejects": 4519336
+  },
+  "baselineBrute": {
+    "n": 5,
+    "min": 280.950791,
+    "median": 287.001627,
+    "p95": 287.677426,
+    "max": 287.677426,
+    "mean": 284.86771280000005,
+    "stddev": 3.030699827710918,
+    "relStddev": 0.01063897272850543,
+    "coldStartMs": 297.00367,
+    "rayTriangleTests": 5990256
+  },
+  "ratioMedian": 1.4005215044051251,
+  "ratioRayTests": 4.072455334076633,
+  "note": "Timings are wall clock on a shared 4-core box and are not the claim; the claim is the certificate and the analytic oracle. Relative stddev is reported as measured."
+}

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>wallthickness-cert-lab — per-triangle wall thickness with recomputable witnesses</title>
+<style>
+  body { margin: 0; background: #101318; color: #e6e9ef; font: 13px/1.5 ui-monospace, Menlo, monospace; }
+  #hud { position: fixed; top: 10px; left: 10px; max-width: 420px; background: #181d25cc; padding: 12px 14px; border: 1px solid #2b323d; border-radius: 8px; }
+  h1 { font-size: 14px; margin: 0 0 6px; }
+  input[type=range] { width: 100%; }
+  #out { white-space: pre-wrap; margin-top: 8px; color: #8fd3a0; }
+  #legend { position: fixed; bottom: 10px; left: 10px; color: #9aa4b2; }
+</style>
+</head>
+<body>
+<div id="hud">
+  <h1>wallthickness-cert-lab</h1>
+  <div>ray from every triangle centroid along −normal → wall thickness + witness (triangle, exit triangle, distance).</div>
+  <label>thin-wall threshold <b id="th">0.200</b></label>
+  <input id="slider" type="range" min="0.02" max="0.60" step="0.005" value="0.200" />
+  <div id="stats"></div>
+  <button id="verify">recompute one witness in this tab</button>
+  <div id="out"></div>
+</div>
+<div id="legend">drag to rotate · red = below threshold</div>
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://unpkg.com/three@0.169.0/build/three.module.js"
+  }
+}
+</script>
+<script type="module" src="./main.js"></script>
+</body>
+</html>

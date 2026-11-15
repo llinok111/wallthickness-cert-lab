@@ -1,0 +1,66 @@
+[
+  {
+    "name": "shell-sphere",
+    "bytes": 102296,
+    "tris": 2448,
+    "verts": 1228,
+    "meta": {
+      "wall": 0.2,
+      "outerTris": 1224,
+      "innerSagitta": 0.012153797590233585,
+      "outerSagitta": 0.01519224698779198,
+      "kind": "sphere-shell"
+    }
+  },
+  {
+    "name": "shell-sphere-misaligned",
+    "bytes": 55089,
+    "tris": 1344,
+    "verts": 676,
+    "meta": {
+      "wall": 0.2,
+      "outerTris": 1224,
+      "innerSagitta": 0.10717967697244904,
+      "outerSagitta": 0.01519224698779198,
+      "kind": "sphere-shell-misaligned"
+    }
+  },
+  {
+    "name": "shell-box",
+    "bytes": 466,
+    "tris": 24,
+    "verts": 16,
+    "meta": {
+      "wall": 0.1,
+      "outerTris": 12,
+      "innerSagitta": 0,
+      "outerSagitta": 0,
+      "kind": "box-shell"
+    }
+  },
+  {
+    "name": "slab-thin",
+    "bytes": 279,
+    "tris": 12,
+    "verts": 8,
+    "meta": {
+      "wall": 0.5,
+      "outerTris": 12,
+      "innerSagitta": 0,
+      "outerSagitta": 0,
+      "kind": "slab"
+    }
+  },
+  {
+    "name": "solid-sphere",
+    "bytes": 49981,
+    "tris": 1224,
+    "verts": 614,
+    "meta": {
+      "wall": null,
+      "outerTris": 1224,
+      "sagitta": 0.01519224698779198,
+      "kind": "solid"
+    }
+  }
+]
