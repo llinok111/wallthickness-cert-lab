@@ -40,19 +40,22 @@ export function bruteThickness(mesh) {
   return out;
 }
 
-/** The common shortcut: nearest VERTEX belonging to a different triangle. */
+/** The common shortcut: nearest VERTEX not belonging to triangle f itself.
+ *  Vertices shared with f MUST be excluded, otherwise the estimator just measures
+ *  the distance from the centroid to f's own corners (an earlier revision of this
+ *  file made exactly that mistake; an independent verifier caught it). */
 export function vertexNearestThickness(mesh) {
-  const sv = new Map();
-  for (let f = 0; f < mesh.nt; f++) for (let k = 0; k < 3; k++) sv.set(mesh.tris[3 * f + k], true);
   const out = [];
   for (let f = 0; f < mesh.nt; f++) {
     const a = P(mesh, mesh.tris[3 * f]), b = P(mesh, mesh.tris[3 * f + 1]), c = P(mesh, mesh.tris[3 * f + 2]);
     const q = [(a[0] + b[0] + c[0]) / 3, (a[1] + b[1] + c[1]) / 3, (a[2] + b[2] + c[2]) / 3];
+    const own = new Set([mesh.tris[3 * f], mesh.tris[3 * f + 1], mesh.tris[3 * f + 2]]);
     let best = Infinity;
     for (let g = 0; g < mesh.nt; g++) {
-      if (g === f) continue;
       for (let k = 0; k < 3; k++) {
-        const p = P(mesh, mesh.tris[3 * g + k]);
+        const vi = mesh.tris[3 * g + k];
+        if (own.has(vi)) continue;                       // never f's own corners
+        const p = P(mesh, vi);
         const dd = Math.hypot(q[0] - p[0], q[1] - p[1], q[2] - p[2]);
         if (dd < best) best = dd;
       }

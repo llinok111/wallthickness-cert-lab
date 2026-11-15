@@ -76,13 +76,15 @@ console.log('== independent brute force agrees with the prefiltered path ==');
 }
 console.log('== the common shortcut (nearest vertex) overestimates a real thin wall ==');
 {
-  const mesh = makeMesh(load('shell-sphere-misaligned'));
-  const exact = wallThickness(mesh).perTri.filter((p) => p.d !== null).slice(0, mesh.nt / 2).map((p) => p.d);
-  const nn = vertexNearestThickness(mesh).slice(0, mesh.nt / 2).map((p) => p.d);
+  const rawM = load('shell-sphere-misaligned');
+  const mesh = makeMesh(rawM);
+  const N = rawM.meta.outerTris;   // the whole outer skin, 1224 rows, no subsetting
+  const exact = wallThickness(mesh).perTri.slice(0, N).filter((p) => p.d !== null).map((p) => p.d);
+  const nn = vertexNearestThickness(mesh).slice(0, N).map((p) => p.d);
   const e = med(exact), n = med(nn);
-  // The shortcut is dominated by same-surface neighbouring vertices, so it collapses
-  // toward the edge length instead of the wall; it is wrong by a large factor.
-  ok('misaligned: vertex-nearest shortcut is off by >2x', (n / e - 1) < -0.5, `exactMedian=${e.toFixed(6)} vertexNNMedian=${n.toFixed(6)} error=${((n / e - 1) * 100).toFixed(2)}% edges=~${(0.1988).toFixed(4)}`);
+  // The shortcut is dominated by same-surface neighbouring vertices (it never reaches the
+  // opposite wall), so it materially underestimates; f's own corners are excluded above.
+  ok('misaligned: vertex-nearest shortcut off by >20% on all 1224 outer rows', (n / e - 1) < -0.2, `exactMedian=${e.toFixed(6)} vertexNNMedian=${n.toFixed(6)} error=${((n / e - 1) * 100).toFixed(2)}% (n=${exact.length})`);
 }
 console.log('== scale: thickness is exactly equivariant, verdicts do not drift ==');
 {
